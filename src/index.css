@@ -1,0 +1,18 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@import "tailwindcss";
+@theme{
+  --color-back_ground:#080b18;
+  --color-box_bg:#11162a;
+  --font-fonts:'Lato', sans-serif;
+  --color-default-color:#fff;
+  --color-profit-color:#4db58e;
+  --color-loss-color:#c8697d;
+}
+
+@layer components{
+  .li{
+     @apply inline-block transition duration-500 hover:scale-110;
+  }
+}
