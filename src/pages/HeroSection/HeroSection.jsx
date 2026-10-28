@@ -57,11 +57,11 @@ function HeroSection(){
                                             <img src={coin.image} alt={coin.name} className="w-4 h-4 text-sm"/>
                                             <p> {coin.name}</p>
                                         </div>
-                                        <p>{coins_api?data_Converter(coin.current_price):"Coin Price"}</p>
+                                        <p>{coins_api?"$"+data_Converter(coin.current_price):"Coin Price"}</p>
                                         <p className={coins_api ? time_Color(coin.price_change_24h) : ""}>
                                             {coins_api ? coin.price_change_24h : "24H Change"}
                                         </p>
-                                        <p>{coins_api?data_Converter(coin.market_cap):"Market Cap"}</p>
+                                        <p>{coins_api?"$"+data_Converter(coin.market_cap):"Market Cap"}</p>
                                     </div>
                                 )
                            }
