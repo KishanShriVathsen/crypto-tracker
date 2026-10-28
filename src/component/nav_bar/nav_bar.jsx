@@ -7,7 +7,7 @@ function Navbar(){
             <div className=" m-3 flex justify-between items-center ">
                 <div className="flex gap-3 items-center cursor-pointer transition duration-500 hover:scale-105">
                     <Bitcoin size={50} className="text-default-color"/>
-                    <h1 className="text-2xl  text-default-color">Crypto-Tracker</h1>
+                    <h3 className="text-2xl  text-default-color">Crypto-Tracker</h3>
                 </div>
 
                 <div className="text-default-color p-3 rounded-md hover:bg-box_bg transition duration-500 hover:scale-105">
