@@ -22,6 +22,11 @@ function HeroSection(){
             console.error("Error fetching coins:",error);
         }
     }
+    const[currency,serCurrency]=useState("$");
+    const [search, setSearch] = useState("");
+    const filteredCoins = coins_api.filter((coin) =>
+        coin.name.toLowerCase().startsWith(search.toLowerCase())
+    );
     return(
         <>
             <div className="text-default-color flex flex-col items-center mt-[5%]">
@@ -37,8 +42,7 @@ function HeroSection(){
                 {/* Search UI and Crypto List */} 
                 <div>
                     <div className="mt-8 flex items-center  justify-center ">
-                        <input type="text" placeholder="Search for a CryptoCurrency..." className="bg-box_bg p-2 text-white placeholder:text-gray-500 w-lg h-11 rounded-md transition duration-500 hover:bg-default-color hover:text-black hover:scale-105" />
-                        <button className="ml-5 rounded-full p-1  transition duration-500 hover:scale-105 hover:bg-default-color hover:text-black active:scale-90"><Search size={35}/></button>
+                        <input type="text" placeholder="Search for a CryptoCurrency..."  value={search} onChange={(e)=>setSearch(e.target.value)} className="bg-box_bg p-2 text-white placeholder:text-gray-500 w-lg h-11 rounded-md transition duration-500 hover:bg-default-color hover:text-black hover:scale-105" />
                     </div>
                     <div className="my-8 ">
                         <div className="bg-box_bg text-lg p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 border-b-2 rounded-t-md ">
@@ -48,23 +52,22 @@ function HeroSection(){
                             <p>24Hr Change</p>
                             <p>Market Gap</p>
                         </div>
-                        {coins_api.map((coin,index)=>{
-                            if(index<10){
+                        {filteredCoins.slice(0, 10).map((coin, index) => {
                                 return(
-                                    <div key={index} className="bg-box_bg p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 border-b-2 cursor-pointer transition hover:scale-101 ">
+                                    <div key={index} className="bg-box_bg  w-3xl p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 border-b-2 cursor-pointer transition hover:scale-101 ">
                                         <p>{index+1}</p>
                                         <div className="flex gap-3 items-center">
-                                            <img src={coin.image} alt={coin.name} className="w-4 h-4 text-sm"/>
+                                            <img src={coin.image} alt={coin.name} className="w-5 h-5 text-sm"/>
                                             <p> {coin.name}</p>
                                         </div>
-                                        <p>{coins_api?"$"+data_Converter(coin.current_price):"Coin Price"}</p>
+                                        <p>{coins_api?currency+data_Converter(coin.current_price):"Coin Price"}</p>
                                         <p className={coins_api ? time_Color(coin.price_change_24h) : ""}>
                                             {coins_api ? coin.price_change_24h : "24H Change"}
                                         </p>
-                                        <p>{coins_api?"$"+data_Converter(coin.market_cap):"Market Cap"}</p>
+                                        <p>{coins_api?currency+data_Converter(coin.market_cap):"Market Cap"}</p>
                                     </div>
                                 )
-                           }
+                           
                         })}
                     </div>
                 </div>
