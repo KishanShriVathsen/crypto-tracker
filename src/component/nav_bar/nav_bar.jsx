@@ -1,6 +1,8 @@
 import { Bitcoin } from 'lucide-react';
-import { Link } from 'react-router-dom';    
-function Navbar(){
+import { Link } from 'react-router-dom';
+import { useState } from 'react';    
+function Navbar({selectedCurrency,setSelectedCurrency}){
+    console.log(selectedCurrency);
     return(
         <>
         <div className="mx-5 border-b border-default-color">
@@ -21,7 +23,7 @@ function Navbar(){
 
                 <div className="flex gap-3">
                     <div>
-                        <select className="bg-box_bg text-default-color p-2 rounded-md">
+                        <select className="bg-box_bg text-default-color p-2 rounded-md" value={selectedCurrency} onChange={(e)=>setSelectedCurrency(e.target.value)}>
                             <option value="USD">USD</option>
                             <option value="EUR">EUR</option>
                             <option value="INR">INR</option>
