@@ -2,7 +2,7 @@ import {Search}from "lucide-react";
 import { useEffect, useState } from "react";
 import data_Converter from '../../data_Converter.js';
 import {time_Color} from '../../data_Converter.js'; //why cause the function is export not export defualt
-function HeroSection(){
+function HeroSection({selectedCurrency}) {
     const [coins_api,setCoins_api]=useState([]);
     const API_KEY=import.meta.env.VITE_CRYPTO_API_KEY;
     const API_URL=import.meta.env.VITE_CRYPTO_API_URL;
@@ -22,11 +22,16 @@ function HeroSection(){
             console.error("Error fetching coins:",error);
         }
     }
-    const[currency,serCurrency]=useState("$");
     const [search, setSearch] = useState("");
     const filteredCoins = coins_api.filter((coin) =>
         coin.name.toLowerCase().startsWith(search.toLowerCase())
     );
+    const currencySymbol={
+        USD: "$",
+        EUR:"€",
+        INR:"₹"
+    }
+    const currency=currencySymbol[selectedCurrency] ||"$";
     return(
         <>
             <div className="text-default-color flex flex-col items-center mt-[5%]">
