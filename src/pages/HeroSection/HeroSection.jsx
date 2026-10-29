@@ -9,14 +9,14 @@ function HeroSection({selectedCurrency}) {
 
     useEffect(()=>{
         fetchCoins();
-    },[])
+    },[selectedCurrency]);//We use a dependency because whenever the selected currency changes, the component re-renders. For example, when we change USD to INR, the value of `selectedCurrency` changes. The dependency tells React to run `useEffect()` again so we can fetch the updated crypto prices.
 
     async function fetchCoins(){
         try{
-        const response=await fetch(`${API_URL}&x_cg_demo_api_key=${API_KEY}`);
-        const data=await response.json();
-        setCoins_api(data);
-        console.log(data);
+            const response = await fetch(`${API_URL.replace("vs_currency=usd", `vs_currency=${selectedCurrency.toLowerCase()}`)}&x_cg_demo_api_key=${API_KEY}`); 
+            const data=await response.json();
+            setCoins_api(data);
+            console.log(data);
         }
         catch(error){
             console.error("Error fetching coins:",error);
