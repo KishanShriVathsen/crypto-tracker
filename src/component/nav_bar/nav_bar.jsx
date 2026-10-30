@@ -9,7 +9,7 @@ function Navbar({selectedCurrency,setSelectedCurrency}){
             <div className=" m-3 flex justify-between items-center ">
                 <div className="flex gap-3 items-center cursor-pointer transition duration-500 hover:scale-105">
                     <Bitcoin size={50} className="text-default-color"/>
-                    <h3 className="text-2xl  text-default-color">Crypto-Tracker</h3>
+                    <Link to='/'><h3 className="text-2xl  text-default-color">Crypto-Tracker</h3></Link>
                 </div>
 
                 <div className="text-default-color p-3 rounded-md hover:bg-box_bg transition duration-500 hover:scale-105">

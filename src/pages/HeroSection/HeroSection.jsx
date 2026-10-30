@@ -1,7 +1,8 @@
 import {Search}from "lucide-react";
 import { useEffect, useState } from "react";
 import data_Converter from '../../data_Converter.js';
-import {time_Color} from '../../data_Converter.js'; //why cause the function is export not export defualt
+import {time_Color} from '../../data_Converter.js'; //{} why cause the function is export not export defualt
+import { Link } from "react-router-dom";
 function HeroSection({selectedCurrency}) {
     const [coins_api,setCoins_api]=useState([]);
     const API_KEY=import.meta.env.VITE_CRYPTO_API_KEY;
@@ -63,7 +64,7 @@ function HeroSection({selectedCurrency}) {
                         </div>
                         {filteredCoins.slice(0,clicking_toggle?10:100).map((coin, index) => {
                                 return(
-                                    <div key={index} className="bg-box_bg  w-3xl p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 border-b-2 cursor-pointer transition hover:scale-101 ">
+                                    <Link to={`/coin/${coin.id}`} key={index} className="bg-box_bg  w-3xl p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 border-b-2 cursor-pointer transition hover:scale-101 ">
                                         <p>{index+1}</p>
                                         <div className="flex gap-3 items-center">
                                             <img src={coin.image} alt={coin.name} className="w-5 h-5 text-sm"/>
@@ -74,7 +75,7 @@ function HeroSection({selectedCurrency}) {
                                             {coins_api ? coin.price_change_24h : "24H Change"}
                                         </p>
                                         <p>{coins_api?currency+data_Converter(coin.market_cap):"Market Cap"}</p>
-                                    </div>
+                                    </Link>
                                 )
                            
                         })}
