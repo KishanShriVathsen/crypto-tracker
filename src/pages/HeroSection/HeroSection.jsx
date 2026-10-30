@@ -32,6 +32,10 @@ function HeroSection({selectedCurrency}) {
         INR:"₹"
     }
     const currency=currencySymbol[selectedCurrency] ||"$";
+    const[clicking_toggle,setClicking_toggle]=useState(true);
+
+    
+    
     return(
         <>
             <div className="text-default-color flex flex-col items-center mt-[5%]">
@@ -47,7 +51,7 @@ function HeroSection({selectedCurrency}) {
                 {/* Search UI and Crypto List */} 
                 <div>
                     <div className="mt-8 flex items-center  justify-center ">
-                        <input type="text" placeholder="Search for a CryptoCurrency..."  value={search} onChange={(e)=>setSearch(e.target.value)} className="bg-box_bg p-2 text-white placeholder:text-gray-500 w-lg h-11 rounded-md transition duration-500 hover:bg-default-color hover:text-black hover:scale-105" />
+                        <input type="text" placeholder="Search for a CryptoCurrency..."  value={search} onChange={(e)=>setSearch(e.target.value)} className="bg-box_bg p-2 text-white placeholder:text-gray-500 w-lg h-11  rounded-md default_hover" />
                     </div>
                     <div className="my-8 ">
                         <div className="bg-box_bg text-lg p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 border-b-2 rounded-t-md ">
@@ -55,9 +59,9 @@ function HeroSection({selectedCurrency}) {
                             <p>Coins</p>
                             <p>Price</p>
                             <p>24Hr Change</p>
-                            <p>Market Gap</p>
+                            <p>Market Cap</p>
                         </div>
-                        {filteredCoins.slice(0, 10).map((coin, index) => {
+                        {filteredCoins.slice(0,clicking_toggle?10:100).map((coin, index) => {
                                 return(
                                     <div key={index} className="bg-box_bg  w-3xl p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 border-b-2 cursor-pointer transition hover:scale-101 ">
                                         <p>{index+1}</p>
@@ -74,10 +78,11 @@ function HeroSection({selectedCurrency}) {
                                 )
                            
                         })}
+                        <button className="bg-box_bg text-white cursor-pointer p-2 rounded-md mt-2.5 font-bold  active:scale-90 default_hover" onClick={() => setClicking_toggle(!clicking_toggle)}> {clicking_toggle?"Click To View All CryptoCurrency":" Click To Show Less"}</button>
                     </div>
                 </div>
             </div>
-        </>
+        </> 
     );
 
 }
