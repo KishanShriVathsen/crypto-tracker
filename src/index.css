@@ -16,3 +16,8 @@
      @apply inline-block transition duration-500 hover:scale-110;
   }
 }
+ @layer utilities {/*previously, you had put default_hover inside the components layer.The normal bg-box_bg utility belongs to the utilities layer, which has higher priority than components.So the normal background could override your hover background.*/
+  .default_hover {
+    @apply transition duration-500 hover:scale-105  hover:bg-default-color hover:text-black;
+  }
+}
