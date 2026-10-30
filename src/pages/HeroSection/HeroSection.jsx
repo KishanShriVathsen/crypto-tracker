@@ -59,7 +59,7 @@ function HeroSection({selectedCurrency}) {
                             <p>Coins</p>
                             <p>Price</p>
                             <p>24Hr Change</p>
-                            <p>Market Cap</p>
+                            <p>Market  Cap</p>
                         </div>
                         {filteredCoins.slice(0,clicking_toggle?10:100).map((coin, index) => {
                                 return(
