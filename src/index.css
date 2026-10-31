@@ -10,10 +10,37 @@
   --color-profit-color:#4db58e;
   --color-loss-color:#c8697d;
 }
+@layer base {
+  h1 {
+    @apply text-4xl font-bold;
+  }
 
+  h2 {
+    @apply text-3xl font-bold;
+  }
+
+  h3 {
+    @apply text-2xl font-bold;
+  }
+
+  h4 {
+    @apply text-xl font-bold;
+  }
+
+  h5 {
+    @apply text-lg font-bold;
+  }
+
+  h6 {
+    @apply text-base font-bold;
+  }
+}
 @layer components{
   .li{
      @apply inline-block transition duration-500 hover:scale-110;
+  }
+  .side_text{
+    @apply text-gray-500;
   }
 }
  @layer utilities {/*previously, you had put default_hover inside the components layer.The normal bg-box_bg utility belongs to the utilities layer, which has higher priority than components.So the normal background could override your hover background.*/

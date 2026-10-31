@@ -14,7 +14,7 @@ function App(){
     <main>
       <Routes>
         <Route path="/" element={<HeroSection selectedCurrency={selectedCurrency}/>} />
-        <Route path='/coin/:coinId' element={<Coin_Details/>}/>{/*The : (colon) tells React Router that this part of the URL is a dynamic parameter whose value can change and Link sends the coin ID through the URL, and :coinId catches that changing value */}
+        <Route path='/coin/:coinId' element={<Coin_Details selectedCurrency={selectedCurrency}/>}/>{/*The : (colon) tells React Router that this part of the URL is a dynamic parameter whose value can change and Link sends the coin ID through the URL, and :coinId catches that changing value */}
       </Routes>
     </main>
     <footer className="flex justify-center">
