@@ -1,5 +1,5 @@
 import { Fullscreen } from "lucide-react";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {LineChart,Line,XAxis,YAxis,Tooltip,ResponsiveContainer,Area,AreaChart} from "recharts";
 import data_Converter from "../../data_Converter.js";
