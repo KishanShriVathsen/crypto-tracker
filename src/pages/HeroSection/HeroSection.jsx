@@ -1,20 +1,24 @@
-import {Search}from "lucide-react";
 import { useEffect, useState } from "react";
 import data_Converter from '../../data_Converter.js';
 import {time_Color} from '../../data_Converter.js'; //{} why cause the function is export not export defualt
 import { Link } from "react-router-dom";
 function HeroSection({selectedCurrency}) {
     const [coins_api,setCoins_api]=useState([]);
+    const [loading,setLoading]=useState(true);
     const API_KEY=import.meta.env.VITE_CRYPTO_API_KEY;
     const API_URL=import.meta.env.VITE_CRYPTO_API_URL;
 
     useEffect(()=>{
         fetchCoins();
     },[selectedCurrency]);//We use a dependency because whenever the selected currency changes, the component re-renders. For example, when we change USD to INR, the value of `selectedCurrency` changes. The dependency tells React to run `useEffect()` again so we can fetch the updated crypto prices.
-
+    
     async function fetchCoins(){
+        setLoading(true);
         try{
             const response = await fetch(`${API_URL.replace("vs_currency=usd", `vs_currency=${selectedCurrency.toLowerCase()}`)}&x_cg_demo_api_key=${API_KEY}`); 
+            if(!response.ok){
+                throw new Error(`HTTP Error:${response.status}`);
+            }
             const data=await response.json();
             setCoins_api(data);
             console.log(data);
@@ -22,10 +26,13 @@ function HeroSection({selectedCurrency}) {
         catch(error){
             console.error("Error fetching coins:",error);
         }
+        finally {
+            setLoading(false);
+        }
     }
     const [search, setSearch] = useState("");
     const filteredCoins = coins_api.filter((coin) =>
-        coin.name.toLowerCase().startsWith(search.toLowerCase())
+        coin.name.toLowerCase().includes(search.toLowerCase())
     );
     const currencySymbol={
         USD: "$",
@@ -35,8 +42,6 @@ function HeroSection({selectedCurrency}) {
     const currency=currencySymbol[selectedCurrency] ||"$";
     const[clicking_toggle,setClicking_toggle]=useState(true);
 
-    
-    
     return(
         <>
             <div className="text-default-color flex flex-col items-center mt-[5%]">
@@ -62,29 +67,50 @@ function HeroSection({selectedCurrency}) {
                             <p>24Hr Change</p>
                             <p>Market  Cap</p>
                         </div>
-                        {filteredCoins.slice(0,clicking_toggle?10:100).map((coin, index) => {
-                                return(
-                                    <Link to={`/coin/${coin.id}`} key={index} className="bg-box_bg  w-3xl p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 border-b-2 cursor-pointer transition hover:scale-101 ">
-                                        <p>{index+1}</p>
-                                        <div className="flex gap-3 items-center">
-                                            <img src={coin.image} alt={coin.name} className="w-5 h-5 text-sm"/>
-                                            <p> {coin.name}</p>
+                            {
+                                loading?(
+                                    <>
+                                        <div className="bg-box_bg  w-3xl p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 ">
+                                                <p className="skeleton w-8 h-5 rounded-md"></p>
+                                                <div>
+                            
+                                                    <p className="skeleton w-8 h-5 rounded-md"></p>
+                                                </div>
+                                                <p className="skeleton w-8 h-5 rounded-md"></p>
+                                                <p className="skeleton w-8 h-5 rounded-md"></p>
+                                                <p className="skeleton w-8 h-5 rounded-md"></p>
                                         </div>
-                                        <p>{coins_api?currency+data_Converter(coin.current_price):"Coin Price"}</p>
-                                        <p className={coins_api ? time_Color(coin.price_change_24h) : ""}>
-                                            {coins_api ? coin.price_change_24h : "24H Change"}
-                                        </p>
-                                        <p>{coins_api?currency+data_Converter(coin.market_cap):"Market Cap"}</p>
-                                    </Link>
-                                )
-                           
-                        })}
-                        <button className="bg-box_bg text-white cursor-pointer p-2 rounded-md mt-2.5 font-bold  active:scale-90 default_hover" onClick={() => setClicking_toggle(!clicking_toggle)}> {clicking_toggle?"Click To View All CryptoCurrency":" Click To Show Less"}</button>
+                                       
+                                    </>
+                                ):
+                                    (filteredCoins.slice(0,clicking_toggle?10:100).map((coin, index) => {
+                                        return(
+                                            
+                                            <Link to={`/coin/${coin.id}`} key={coin.id} className="bg-box_bg  w-3xl p-5 grid grid-cols-[0.5fr_1fr_1fr_2fr_1fr] gap-1 border-b-2 cursor-pointer transition hover:scale-101 ">
+                                                <p>{index+1}</p>
+                                                <div className="flex gap-3 items-center">
+                                                    <img src={coin.image} alt={coin.name} className="w-5 h-5 text-sm"/>
+                                                    <p> {coin.name}</p>
+                                                </div>
+                                                <p>{currency+data_Converter(coin.current_price)}</p>
+                                                <p className={time_Color(coin.price_change_24h)}>
+                                                    {coin.price_change_24h}
+                                                </p>
+                                                <p>{currency+data_Converter(coin.market_cap)}</p>
+                                            </Link>
+                                            
+                                        )
+                            
+                                        })
+                                    )
+                                    
+                            }
+                            <button className="bg-box_bg text-white cursor-pointer p-2 rounded-md mt-2.5 font-bold  active:scale-90 default_hover" onClick={() => setClicking_toggle(!clicking_toggle)}> {clicking_toggle?"Click To View All CryptoCurrency":" Click To Show Less"}</button>    
+                        </div>
                     </div>
                 </div>
-            </div>
-        </> 
-    );
+            </> 
+        );
 
-}
-export default HeroSection;
+    }
+    export default HeroSection;
