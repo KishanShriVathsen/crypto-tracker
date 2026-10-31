@@ -70,11 +70,19 @@ function Coin_Details({selectedCurrency}){
 
     return(
         <>
-            {coin_detail&&(
+        {!coin_detail ? (
+            <div className="flex justify-center">
+                <div className="bg-box_bg mt-5 p-5 w-[95%] rounded-md">
+                    <div className="skeleton w-20 h-20"></div>
+                    <div className="skeleton w-48 h-5 mt-4"></div>  {/*skeleton Loading */}
+                    <div className="skeleton w-32 h-5 mt-3"></div>
+                </div>
+            </div>
+        ):coin_detail&&(
                     <div className="flex justify-center">
                         <div className=" bg-box_bg mt-5 p-5 w-[95%] rounded-md">
                             <div className="flex items-center gap-[2%] border-b-2 border-default-color">
-                                <img src={coin_detail.image?.large} className="w-[10%]"/>
+                                <img src={coin_detail.image?.large} className="w-[10%] h-30"/>
                                 <div>
                                     <h1 className="text-default-color text-5xl text-center">{coin_detail.name}({coin_detail.symbol.toUpperCase()})</h1>
                                     <p className="side_text">Rank#{coin_detail.market_cap_rank}</p>
@@ -107,35 +115,36 @@ function Coin_Details({selectedCurrency}){
                     </div>
                 )
             }
-           <ResponsiveContainer width="95%" height={500}>
-                <AreaChart data={chartData} className="mt-5">
-                    <XAxis  dataKey="time" tickFormatter={(timestamp) =>
-                                                    new Date(timestamp).toLocaleDateString("en-US", {
-                                                        month: "short",
-                                                        day: "numeric"
-                                                    })
-                                            }
-                    />
-                    <YAxis />
-                    <Tooltip content={({ active, payload }) => {
-                                if (active && payload && payload.length) {
-                                    return (
-                                        <div className="bg-box_bg p-3 rounded-md text-default-color">
-                                            <p>{currency}{data_Converter(Number(payload[0].value))}</p>
-                                        </div>
-                                    );
-                                }
-                                return null;}}
-                    />{/*<Tooltip/> in Recharts displays information when the user hovers their mouse over a point on the chart. */}
-                    <Area
-                        dataKey="price"
-                        stroke="#fff"
-                        strokeWidth={2}
-                        fill="#11162a"
-                        fillOpacity={0.5}
-                    />
-                </AreaChart>
-            </ResponsiveContainer>
+            {!getGraph.prices?(//added
+                <div className="w-[95%] h-125 mt-5 mx-9 rounded-md bg-box_bg">
+                    <div className="h-[90%] w-2 ml-3 m-2 skeleton rounded-md"></div>
+                    <div className="h-2 w-[90%] ml-3 skeleton rounded-md"></div>
+                </div>
+            ):
+                <ResponsiveContainer width="95%" height={500}>
+                    <AreaChart data={chartData} className="mt-5">
+                        <XAxis  dataKey="time" tickFormatter={(timestamp) =>new Date(timestamp).toLocaleDateString("en-US", {month: "short",day: "numeric"})}/>
+                        <YAxis />
+                        <Tooltip content={({ active, payload }) => {
+                                    if (active && payload && payload.length) {
+                                        return (
+                                            <div className="bg-box_bg p-3 rounded-md text-default-color">
+                                                <p>{currency}{data_Converter(Number(payload[0].value))}</p>
+                                            </div>
+                                        );
+                                    }
+                                    return null;}}
+                        />{/*<Tooltip/> in Recharts displays information when the user hovers their mouse over a point on the chart. */}
+                        <Area
+                            dataKey="price"
+                            stroke="#fff"
+                            strokeWidth={2}
+                            fill="#11162a"
+                            fillOpacity={0.5}
+                        />
+                    </AreaChart>
+                </ResponsiveContainer>
+            }
        
         </>
     );

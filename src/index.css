@@ -42,6 +42,17 @@
   .side_text{
     @apply text-gray-500;
   }
+  .skeleton{
+    animation: skeleton-Loading 1s linear infinite alternate;
+  }
+}
+@keyframes skeleton-Loading {
+  from {
+    background-color: #11162a;
+  }
+  to {
+    background-color: #252d45;
+  }
 }
  @layer utilities {/*previously, you had put default_hover inside the components layer.The normal bg-box_bg utility belongs to the utilities layer, which has higher priority than components.So the normal background could override your hover background.*/
   .default_hover {
