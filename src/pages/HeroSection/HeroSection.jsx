@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import data_Converter from '../../data_Converter.js';
 import {time_Color} from '../../data_Converter.js'; //{} why cause the function is export not export defualt
 import { Link } from "react-router-dom";
+import error_image from '../../assets/error_image.png';
 function HeroSection({selectedCurrency}) {
     const [coins_api,setCoins_api]=useState([]);
     const [loading,setLoading]=useState(true);
+    const [error,setError]=useState(null);
     const API_KEY=import.meta.env.VITE_CRYPTO_API_KEY;
     const API_URL=import.meta.env.VITE_CRYPTO_API_URL;
 
@@ -14,6 +16,7 @@ function HeroSection({selectedCurrency}) {
     
     async function fetchCoins(){
         setLoading(true);
+        setError(null);
         try{
             const response = await fetch(`${API_URL.replace("vs_currency=usd", `vs_currency=${selectedCurrency.toLowerCase()}`)}&x_cg_demo_api_key=${API_KEY}`); 
             if(!response.ok){
@@ -24,6 +27,7 @@ function HeroSection({selectedCurrency}) {
             console.log(data);
         }
         catch(error){
+            setError(error.message);//it store error message
             console.error("Error fetching coins:",error);
         }
         finally {
@@ -44,13 +48,22 @@ function HeroSection({selectedCurrency}) {
 
     return(
         <>
-            <div className="text-default-color flex flex-col items-center mt-[5%]">
+           {/*error */}
+            { error?(
+                    <div className="bg-back_ground w-full text-center flex flex-col  items-center mt-2">
+                        <img src={error_image} alt="Connection error" className="w-[30%]"/>
+                        <h1 className="text-default-color">Oops,Something Went Wrong!</h1>
+                        <p className="side_text">{error}</p>
+                        <button onClick={fetchCoins} className="bg-box_bg text-white default_hover p-2 rounded-md mt-3">Try Again</button>
+                    </div>
+                ):
+            (<div className="text-default-color flex flex-col items-center mt-[5%]">
                 <div>
                     <div className="mb-5 transition duration-500 hover:scale-105">
                         <h1 className="text-5xl font-bold">The Gratest Crypto Tracker</h1>
                     </div>
                     <div className="text-gray-400 text-center">
-                        <p>Welcome to the greatest crypto tracker!</p>
+                        <p>Welcome to the Greatest crypto tracker!</p>
                         <p>Sing up now to get the latest crypto prices and market insights.</p>
                     </div>   
                 </div>
@@ -107,9 +120,10 @@ function HeroSection({selectedCurrency}) {
                             }
                             <button className="bg-box_bg text-white cursor-pointer p-2 rounded-md mt-2.5 font-bold  active:scale-90 default_hover" onClick={() => setClicking_toggle(!clicking_toggle)}> {clicking_toggle?"Click To View All CryptoCurrency":" Click To Show Less"}</button>    
                         </div>
-                    </div>
                 </div>
-            </> 
+            </div>)
+            }
+        </> 
         );
 
     }

@@ -32,7 +32,7 @@ function Navbar({selectedCurrency,setSelectedCurrency}){
                     </div>
                     
                     <div>
-                        <button className="bg-box_bg text-default-color p-2 rounded-md duration-500 cursor-pointer hover:scale-105">Sign    In</button>
+                        <button className="bg-box_bg text-default-color p-2 rounded-md duration-500 cursor-pointer hover:scale-105">Sign up</button>
                     </div>
                     
                 </div>
