@@ -116,7 +116,7 @@ function Coin_Details({selectedCurrency}){
                 )
             }
             {!getGraph.prices?(//added
-                <div className="w-[95%] h-125 mt-5 mx-9 rounded-md bg-box_bg max-sm:p-3 max-sm:h-90">
+                <div className="w-[95%] h-125 mt-5 mx-auto rounded-md bg-box_bg max-sm:p-3 max-sm:h-90">
                     <div className="h-[90%] w-2 ml-3 m-2 skeleton rounded-md"></div>
                     <div className="h-2 w-[90%] ml-3 skeleton rounded-md"></div>
                 </div>
