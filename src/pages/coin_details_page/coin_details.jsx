@@ -72,7 +72,7 @@ function Coin_Details({selectedCurrency}){
         <>
         {!coin_detail ? (
             <div className="flex justify-center">
-                <div className="bg-box_bg mt-5 p-5 w-[95%] rounded-md">
+                <div className="bg-box_bg mt-5 p-5 w-[95%] rounded-md max-sm:p-3">
                     <div className="skeleton w-20 h-20"></div>
                     <div className="skeleton w-48 h-5 mt-4"></div>  {/*skeleton Loading */}
                     <div className="skeleton w-32 h-5 mt-3"></div>
@@ -80,33 +80,33 @@ function Coin_Details({selectedCurrency}){
             </div>
         ):coin_detail&&(
                     <div className="flex justify-center">
-                        <div className=" bg-box_bg mt-5 p-5 w-[95%] rounded-md">
+                        <div className=" bg-box_bg mt-5 p-5 w-[95%] rounded-md max-sm:p-3">
                             <div className="flex items-center gap-[2%] border-b-2 border-default-color">
-                                <img src={coin_detail.image?.large} className="w-[10%] h-30"/>
+                                <img src={coin_detail.image?.large} className="w-[10%] h-[10%]"/>
                                 <div>
-                                    <h1 className="text-default-color text-5xl text-center">{coin_detail.name}({coin_detail.symbol.toUpperCase()})</h1>
-                                    <p className="side_text">Rank#{coin_detail.market_cap_rank}</p>
-                                    <h2 className="text-default-color">{currency+data_Converter(coin_detail.market_data.current_price[selectedCurrency.toLowerCase()])}</h2>
-                                    <p className="side_text">Current Price</p>
+                                    <h1 className="text-default-color text-5xl text-center max-sm:text-lg">{coin_detail.name}({coin_detail.symbol.toUpperCase()})</h1>
+                                    <p className="side_text max-sm:text-xs">Rank#{coin_detail.market_cap_rank}</p>
+                                    <h2 className="text-default-color max-sm:text-sm">{currency+data_Converter(coin_detail.market_data.current_price[selectedCurrency.toLowerCase()])}</h2>
+                                    <p className="side_text  max-sm:text-xs">Current Price</p>
                                 </div>
                             </div>
                             <div className="text-default-color mt-5">
-                                <h2>Market Statistics</h2>
+                                <h2 className="max-sm:text-sm">Market Statistics</h2>
                                 <ul className="grid grid-cols-2">
                                     <li>
-                                        <p className="side_text">Market Cap</p>
+                                        <p className="side_text max-sm:text-xs">Market Cap</p>
                                         <p>{currency+data_Converter(coin_detail.market_data.market_cap[selectedCurrency.toLowerCase()])}</p>{/*We don't need three steps; we can do it in just two steps by using bracket notation (]" */}
                                     </li>
                                     <li>
-                                        <p className="side_text">24H High</p>
+                                        <p className="side_text max-sm:text-xs">24H High</p>
                                         <p>{currency+data_Converter(coin_detail.market_data.high_24h[selectedCurrency.toLowerCase()])}</p>
                                     </li>
                                     <li>
-                                        <p className="side_text">24H Volume</p>
+                                        <p className="side_text max-sm:text-xs">24H Volume</p>
                                         <p>{currency+data_Converter(coin_detail.market_data.total_volume[selectedCurrency.toLowerCase()])}</p>
                                     </li>
                                     <li>
-                                        <p className="side_text">24H Low</p>
+                                        <p className="side_text max-sm:text-xs">24H Low</p>
                                         <p>{currency+data_Converter(coin_detail.market_data.low_24h[selectedCurrency.toLowerCase()])}</p>
                                     </li>
                                 </ul>
@@ -116,34 +116,36 @@ function Coin_Details({selectedCurrency}){
                 )
             }
             {!getGraph.prices?(//added
-                <div className="w-[95%] h-125 mt-5 mx-9 rounded-md bg-box_bg">
+                <div className="w-[95%] h-125 mt-5 mx-9 rounded-md bg-box_bg max-sm:p-3 max-sm:h-90">
                     <div className="h-[90%] w-2 ml-3 m-2 skeleton rounded-md"></div>
                     <div className="h-2 w-[90%] ml-3 skeleton rounded-md"></div>
                 </div>
             ):
-                <ResponsiveContainer width="95%" height={500}>
-                    <AreaChart data={chartData} className="mt-5">
-                        <XAxis  dataKey="time" tickFormatter={(timestamp) =>new Date(timestamp).toLocaleDateString("en-US", {month: "short",day: "numeric"})}/>
-                        <YAxis />
-                        <Tooltip content={({ active, payload }) => {
-                                    if (active && payload && payload.length) {
-                                        return (
-                                            <div className="bg-box_bg p-3 rounded-md text-default-color">
-                                                <p>{currency}{data_Converter(Number(payload[0].value))}</p>
-                                            </div>
-                                        );
-                                    }
-                                    return null;}}
-                        />{/*<Tooltip/> in Recharts displays information when the user hovers their mouse over a point on the chart. */}
-                        <Area
-                            dataKey="price"
-                            stroke="#fff"
-                            strokeWidth={2}
-                            fill="#11162a"
-                            fillOpacity={0.5}
-                        />
-                    </AreaChart>
-                </ResponsiveContainer>
+                <div className="w-[95%] h-125 max-sm:h-90">
+                    <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={chartData} className="mt-5">
+                            <XAxis  dataKey="time" tickFormatter={(timestamp) =>new Date(timestamp).toLocaleDateString("en-US", {month: "short",day: "numeric"})}/>
+                            <YAxis />
+                            <Tooltip content={({ active, payload }) => {
+                                        if (active && payload && payload.length) {
+                                            return (
+                                                <div className="bg-box_bg p-3 rounded-md text-default-color">
+                                                    <p>{currency}{data_Converter(Number(payload[0].value))}</p>
+                                                </div>
+                                            );
+                                        }
+                                        return null;}}
+                            />{/*<Tooltip/> in Recharts displays information when the user hovers their mouse over a point on the chart. */}
+                            <Area
+                                dataKey="price"
+                                stroke="#fff"
+                                strokeWidth={2}
+                                fill="#11162a"
+                                fillOpacity={0.5}
+                            />
+                        </AreaChart>
+                    </ResponsiveContainer>
+                </div>
             }
        
         </>
