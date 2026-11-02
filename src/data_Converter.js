@@ -1,6 +1,6 @@
 export default function data_Converter(data) {
     if(data<1000){
-        return(data);
+        return(data.toFixed(2));
     }
     else if(data>=1000 && data<1000000){
         return((data/1000).toFixed(2)+"K");
