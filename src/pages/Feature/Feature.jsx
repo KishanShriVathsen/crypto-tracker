@@ -6,7 +6,7 @@ import CD from '../../assets/Coin_Details.png';
 import PC2 from '../../assets/24H_Price_Change.png';
 function Features() {
     return(
-        <div className="mt-5 p-5">
+        <div className="mt-5 p-5 max-sm:text-xs">
             <h2 className="text-default-color text-center ">Everything You Need to Track Crypto.</h2>
             <div className="text-default-color p-5 bg-box_bg rounded-md mt-2">{/*About Crypto Tracker */}
                 <p>Crypto Tracker is a responsive web application that provides updated cryptocurrency market data, including coin prices, market capitalization, and 24-hour price changes. Built using React and Tailwind CSS, it offers a clean, modern interface to explore and track cryptocurrency market trends.</p>
