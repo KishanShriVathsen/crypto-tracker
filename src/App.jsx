@@ -10,11 +10,11 @@ import Blog from './pages/Blog/Blog';
 function App(){
   const[selectedCurrency,setSelectedCurrency]=useState("USD");
   return(
-    <>
+    <div className="min-h-screen flex flex-col">
     <header>
       <Navbar selectCurrency={selectedCurrency} setSelectedCurrency={setSelectedCurrency}/>
     </header> 
-    <main>
+    <main className="flex-1">
       <Routes>
         <Route path="/" element={<HeroSection selectedCurrency={selectedCurrency}/>} />
         <Route path='/coin/:coinId' element={<Coin_Details selectedCurrency={selectedCurrency}/>}/>{/*The : (colon) tells React Router that this part of the URL is a dynamic parameter whose value can change and Link sends the coin ID through the URL, and :coinId catches that changing value */}
@@ -26,7 +26,7 @@ function App(){
     <footer className="flex justify-center">
       <Footer/>
     </footer>
-    </>
+    </div>
   )
 }
 export default App;
