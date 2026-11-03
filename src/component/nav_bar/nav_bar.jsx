@@ -13,7 +13,7 @@ function Navbar({selectedCurrency,setSelectedCurrency}){
                 <nav className="text-default-color p-3 rounded-md hover:bg-box_bg transition duration-500 hover:scale-105 max-sm:p-2">
                     <ul className="flex gap-27.5  max-sm:gap-2.5">
                         <li><Link to="/" className="li">Home</Link></li>
-                        <li><Link to="/" className="li">Features</Link></li> 
+                        <li><Link to="/features" className="li">Features</Link></li> 
                         <li><Link to="/" className="li">Pricing</Link></li>
                         <li><Link to="/" className="li">Blog</Link></li>
                     </ul>
