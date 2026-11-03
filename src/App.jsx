@@ -6,6 +6,7 @@ import Footer from './component/footer/footer';
 import Coin_Details from './pages/coin_details_page/coin_details';
 import Features from './pages/Feature/Feature';
 import Pricing from './pages/Pricing/Pricing';
+import Blog from './pages/Blog/Blog';
 function App(){
   const[selectedCurrency,setSelectedCurrency]=useState("USD");
   return(
@@ -19,6 +20,7 @@ function App(){
         <Route path='/coin/:coinId' element={<Coin_Details selectedCurrency={selectedCurrency}/>}/>{/*The : (colon) tells React Router that this part of the URL is a dynamic parameter whose value can change and Link sends the coin ID through the URL, and :coinId catches that changing value */}
         <Route path='/features' element={<Features/>} />
         <Route path='/Pricing' element={<Pricing/>} />
+        <Route path='/Blog' element={<Blog/>} />
       </Routes>
     </main>
     <footer className="flex justify-center">

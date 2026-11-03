@@ -15,7 +15,7 @@ function Navbar({selectedCurrency,setSelectedCurrency}){
                         <li><Link to="/" className="li">Home</Link></li>
                         <li><Link to="/features" className="li">Features</Link></li> 
                         <li><Link to="/Pricing" className="li">Pricing</Link></li>
-                        <li><Link to="/" className="li">Blog</Link></li>
+                        <li><Link to="/Blog" className="li">Blog</Link></li>
                     </ul>
                 </nav>
 
