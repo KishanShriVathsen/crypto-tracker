@@ -4,7 +4,7 @@ A responsive cryptocurrency tracking dashboard built with **React** and **Tailwi
 
 ## Live Demo
 
-[Visit Crypto Tracker](https://crypto-tracker-xi-lemon.vercel.app/)
+[Visit Crypto Tracker](https://crypto-tracker-git-main-red-x2.vercel.app/)
 
 
 ### Home Page
