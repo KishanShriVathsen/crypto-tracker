@@ -1,16 +1,84 @@
-# React + Vite
+# Crypto Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A responsive cryptocurrency tracking dashboard built with **React** and **Tailwind CSS** that displays cryptocurrency market data, prices, market trends, and detailed coin information using the CoinGecko Demo API.
 
-Currently, two official plugins are available:
+### Home Page
+![Home Page](./screenshots/Home_Page.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Coin Details
+![Coin Details](./screenshots/Coin_Details.png)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 📈 View cryptocurrency market data.
+- 🔍 Search for cryptocurrencies.
+- 💰 View current coin prices and market capitalization.
+- 📊 Explore interactive cryptocurrency price charts.
+- 🌍 Switch between supported currencies.
+- 📱 Responsive user interface.
+- 🔗 Navigate between pages using React Router.
 
-## Expanding the Oxlint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Frontend:** React, JavaScript
+- **Styling:** Tailwind CSS v4
+- **Routing:** React Router
+- **Charts:** Recharts
+- **Icons:** Lucide React
+- **API:** CoinGecko Demo API
+- **Build Tool:** Vite
+- **Version Control:** Git & GitHub
+
+## Installation and Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/KishanShriVathsen/crypto-tracker.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd crypto-tracker
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Create a `.env` file in the root directory:
+
+   ```env
+   VITE_CRYPTO_API_KEY=your_api_key
+   VITE_CRYPTO_API_URL=your_api_base_url
+   ```
+
+5. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+## Limitations
+
+- Uses the CoinGecko Demo API, which has request and rate limitations.
+- Market data availability depends on the API.
+- No backend implementation currently.
+- No user authentication or personal portfolio management.
+
+## Project Purpose
+
+This project was developed to strengthen my practical knowledge of React, API integration, state management, routing, responsive design, and modern frontend development.
+
+## Developer
+
+**Kishan Shri Vathsen M**
+
+- GitHub: [@KishanShriVathsen](https://github.com/KishanShriVathsen)
+
+---
+
+⭐ If you find this project interesting, feel free to explore the repository!
